@@ -23,33 +23,39 @@
     <path id="arc" d="M 144 89.7 A 192 192 300 1 0 336 89.7"/>
   </defs>
   <rect x="0" y="0" width="640" height="480" fill="#000"/>
-  <use xlink:href="#a" x="48" y="16" stroke="#fb4426" filter="url(#blur)"/>
-  <use xlink:href="#a" x="48" y="16" stroke="#fb4426"/>
-  <use xlink:href="#a" x="48" y="16" stroke="#fff" opacity="0.5"/>
-  <use xlink:href="#r" x="102" y="16" stroke="#fb4426" filter="url(#blur)"/>
-  <use xlink:href="#r" x="102" y="16" stroke="#fb4426"/>
-  <use xlink:href="#r" x="102" y="16" stroke="#fff" opacity="0.5"/>
-  <use xlink:href="#c" x="160" y="16" stroke="#fb4426" filter="url(#blur)"/>
-  <use xlink:href="#c" x="160" y="16" stroke="#fb4426"/>
-  <use xlink:href="#c" x="160" y="16" stroke="#fff" opacity="0.5"/>
-  <use xlink:href="#d2" x="272" y="16" stroke="#fb4426" filter="url(#blur)"/>
-  <use xlink:href="#d2" x="272" y="16" stroke="#fb4426"/>
-  <use xlink:href="#d2" x="272" y="16" stroke="#fff" opacity="0.5"/>
-  <use xlink:href="#e" x="328" y="16" stroke="#fb4426" filter="url(#blur)"/>
-  <use xlink:href="#e" x="328" y="16" stroke="#fb4426"/>
-  <use xlink:href="#e" x="328" y="16" stroke="#fff" opacity="0.5"/>
-  <use xlink:href="#p" x="384" y="16" stroke="#fb4426" filter="url(#blur)"/>
-  <use xlink:href="#p" x="384" y="16" stroke="#fb4426"/>
-  <use xlink:href="#p" x="384" y="16" stroke="#fff" opacity="0.5"/>
-  <use xlink:href="#a" x="440" y="16" stroke="#fb4426" filter="url(#blur)"/>
-  <use xlink:href="#a" x="440" y="16" stroke="#fb4426"/>
-  <use xlink:href="#a" x="440" y="16" stroke="#fff" opacity="0.5"/>
-  <use xlink:href="#r" x="496" y="16" stroke="#fb4426" filter="url(#blur)"/>
-  <use xlink:href="#r" x="496" y="16" stroke="#fb4426"/>
-  <use xlink:href="#r" x="496" y="16" stroke="#fff" opacity="0.5"/>
-  <use xlink:href="#t" x="552" y="16" stroke="#fb4426" filter="url(#blur)"/>
-  <use xlink:href="#t" x="552" y="16" stroke="#fb4426"/>
-  <use xlink:href="#t" x="552" y="16" stroke="#fff" opacity="0.5"/>
+  <g stroke="#fb4426">
+    <g filter="url(#blur)">
+      <use xlink:href="#a" x="48" y="16"/>
+      <use xlink:href="#r" x="102" y="16"/>
+      <use xlink:href="#c" x="160" y="16"/>
+      <use xlink:href="#d2" x="272" y="16"/>
+      <use xlink:href="#e" x="328" y="16"/>
+      <use xlink:href="#p" x="384" y="16"/>
+      <use xlink:href="#a" x="440" y="16"/>
+      <use xlink:href="#r" x="496" y="16"/>
+      <use xlink:href="#t" x="552" y="16"/>
+    </g>
+    <use xlink:href="#a" x="48" y="16"/>
+    <use xlink:href="#r" x="102" y="16"/>
+    <use xlink:href="#c" x="160" y="16"/>
+    <use xlink:href="#d2" x="272" y="16"/>
+    <use xlink:href="#e" x="328" y="16"/>
+    <use xlink:href="#p" x="384" y="16"/>
+    <use xlink:href="#a" x="440" y="16"/>
+    <use xlink:href="#r" x="496" y="16"/>
+    <use xlink:href="#t" x="552" y="16"/>
+  </g>
+  <g stroke="#fff" opacity="0.5">
+    <use xlink:href="#a" x="48" y="16"/>
+    <use xlink:href="#r" x="102" y="16"/>
+    <use xlink:href="#c" x="160" y="16"/>
+    <use xlink:href="#d2" x="272" y="16"/>
+    <use xlink:href="#e" x="328" y="16"/>
+    <use xlink:href="#p" x="384" y="16"/>
+    <use xlink:href="#a" x="440" y="16"/>
+    <use xlink:href="#r" x="496" y="16"/>
+    <use xlink:href="#t" x="552" y="16"/>
+  </g>
   <use xlink:href="#arc" x="80" stroke="#3a94e1" filter="url(#blur)"/>
   <use xlink:href="#arc" x="80" stroke="#3a94e1"/>
   <use xlink:href="#arc" x="80" stroke="#fff" opacity="0.5"/>
