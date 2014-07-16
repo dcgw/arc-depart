@@ -5,7 +5,7 @@
     stroke-width="4px" fill="none" stroke-linecap="round"
     stroke-linejoin="round">
   <defs>
-    <filter id="blur">
+    <filter id="blur" x="-20%" y="-20%" width="140%" height="140%">
       <feGaussianBlur stdDeviation="4"/>
     </filter>
     <path id="a" d="M 0,40 L 0,16 A 16,16,90,0,1,16,0 L 24,0
