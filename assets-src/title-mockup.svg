@@ -19,7 +19,7 @@
     <path id="e" d="M 32,0 L 0,0 0,40 40,40 M 0,24 L 24,24"/>
     <path id="p" d="M 0,40 L 0,0 24,0 A 16,12,180,1,1,24,24 L 0,24"/>
     <path id="t" d="M 0,0 L 40,0 M 20,0 L 20,40"/>
-    <path id="arc" d="M 144,89.7 A 192,192,300,1,0,336,89.7"/>
+    <path id="arc" d="M 144,73.7 A 192,192,300,1,0,336,73.7"/>
     <path id="ship" d="M 0,-20 L 14,4 20,4 10,20 6,14 -6,14 -10,20
         -20,4 -14,4 Z"/>
   </defs>
@@ -57,11 +57,11 @@
     <use xlink:href="#r" x="496" y="16"/>
     <use xlink:href="#t" x="552" y="16"/>
   </g>
-  <use xlink:href="#arc" x="80" stroke="#3a94e1" filter="url(#blur)"/>
-  <use xlink:href="#arc" x="80" stroke="#3a94e1"/>
-  <use xlink:href="#arc" x="80" stroke="#fff" opacity="0.5"/>
-  <use xlink:href="#ship" x="320" y="240" stroke="#30ef42"
+  <use xlink:href="#arc" x="80" y="16" stroke="#3a94e1" filter="url(#blur)"/>
+  <use xlink:href="#arc" x="80" y="16" stroke="#3a94e1"/>
+  <use xlink:href="#arc" x="80" y="16" stroke="#fff" opacity="0.5"/>
+  <use xlink:href="#ship" x="320" y="256" stroke="#30ef42"
       filter="url(#blur)"/>
-  <use xlink:href="#ship" x="320" y="240" stroke="#30ef42"/>
-  <use xlink:href="#ship" x="320" y="240" stroke="#fff" opacity="0.5"/>
+  <use xlink:href="#ship" x="320" y="256" stroke="#30ef42"/>
+  <use xlink:href="#ship" x="320" y="256" stroke="#fff" opacity="0.5"/>
 </svg>
