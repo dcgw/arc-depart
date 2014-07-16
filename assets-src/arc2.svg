@@ -11,8 +11,8 @@
     <path id="arc" d="M 96,-166.3 A 192,192,300,1,1,-96,-166.3"/>
   </defs>
   <rect x="0" y="0" width="416" height="416" fill="#000"/>
-  <use xlink:href="#arc" x="208" y="208" stroke="#fb4426"
+  <use xlink:href="#arc" x="208" y="208" stroke="#3a94e1"
       filter="url(#blur)"/>
-  <use xlink:href="#arc" x="208" y="208" stroke="#fb4426"/>
+  <use xlink:href="#arc" x="208" y="208" stroke="#3a94e1"/>
   <use xlink:href="#arc" x="208" y="208" stroke="#fff" opacity="0.5"/>
 </svg>
