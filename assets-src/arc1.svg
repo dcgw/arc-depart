@@ -10,7 +10,7 @@
         stroke-width="4px" fill="none" stroke-linecap="round"/>
   </defs>
   <rect x="0" y="0" width="480" height="480" fill="#000"/>
-  <use xlink:href="#arc" stroke="#f42908" filter="url(#blur)"/>
-  <use xlink:href="#arc" stroke="#f42908"/>
+  <use xlink:href="#arc" stroke="#fb4426" filter="url(#blur)"/>
+  <use xlink:href="#arc" stroke="#fb4426"/>
   <use xlink:href="#arc" stroke="#fff" opacity="0.7"/>
 </svg>
