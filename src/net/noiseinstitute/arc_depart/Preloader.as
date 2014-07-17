@@ -1,4 +1,4 @@
-package net.noiseinstitute.game {
+package net.noiseinstitute.arc_depart {
     import flash.display.DisplayObject;
     import flash.display.Shape;
     import flash.display.Sprite;
@@ -9,9 +9,9 @@ package net.noiseinstitute.game {
     import flash.utils.getDefinitionByName;
 
     [SWF(width="640", height="480", frameRate="60", backgroundColor="000000")]
-    [Frame(factoryClass="net.noiseinstitute.game.Main")]
+    [Frame(factoryClass="net.noiseinstitute.arc_depart.Main")]
     public class Preloader extends Sprite {
-        private static const MAIN_CLASS_NAME:String = "net.noiseinstitute.game.Main";
+        private static const MAIN_CLASS_NAME:String = "net.noiseinstitute.arc_depart.Main";
 
         private static const BACKGROUND_COLOUR:uint = 0x000000;
         private static const FOREGROUND_COLOUR:uint = 0xFFFFFF;
