@@ -7,6 +7,8 @@ package net.noiseinstitute.arc_depart {
             ship.x = Main.WIDTH * 0.5;
             ship.y = Main.HEIGHT * 0.5;
             add(ship);
+
+            add(new Arc);
         }
     }
 }
