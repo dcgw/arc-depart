@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<swf version="9" compressed="1">
+    <Header framerate="60" frames="1">
+        <size>
+            <Rectangle left="0" right="8320" top="0" bottom="8320"/>
+        </size>
+        <tags>
+            <FileAttributes hasMetaData="0" allowABC="1" suppressCrossDomainCaching="0"
+                    swfRelativeURLs="0" useNetwork="0"/>
+            <SetBackgroundColor>
+                <color>
+                    <Color red="0" green="0" blue="0"/>
+                </color>
+            </SetBackgroundColor>
+            <DefineShape5 objectID="1" nonScalingStrokes="1" scalingStrokes="0">
+                <bounds>
+                    <Rectangle left="272" right="8048" top="795" bottom="8051"/>
+                </bounds>
+                <strokeBounds>
+                    <Rectangle left="312" right="8008" top="835" bottom="8011"/>
+                </strokeBounds>
+                <styles>
+                    <StyleList>
+                        <fillStyles/>
+                        <lineStyles>
+                            <LineStyle width="80" startCapStyle="0" jointStyle="0" hasFill="0"
+                                    noHScale="1" noVScale="1" pixelHinting="0" noClose="1"
+                                    endCapStyle="0">
+                                <fillColor>
+                                    <Color red="255" green="255" blue="255" alpha="255"/>
+                                </fillColor>
+                            </LineStyle>
+                        </lineStyles>
+                    </StyleList>
+                </styles>
+                <shapes>
+                    <Shape>
+                        <edges>
+                            <ShapeSetup x="6080" y="835" lineStyle="1"/>
+                            <CurveTo x1="1299" y1="756" x2="447" y2="1438"/>
+                            <CurveTo x1="448" y1="1438" x2="-656" y2="1357"/>
+                            <CurveTo x1="-656" y1="1357" x2="-1402" y2="554"/>
+                            <CurveTo x1="-1400" y1="552" x2="-1402" y2="-552"/>
+                            <CurveTo x1="-1401" y1="-554" x2="-656" y2="-1357"/>
+                            <CurveTo x1="-655" y1="-1357" x2="447" y2="-1438"/>
+                            <CurveTo x1="447" y1="-1438" x2="1300" y2="-756"/>
+                            <ShapeSetup/>
+                        </edges>
+                    </Shape>
+                </shapes>
+            </DefineShape5>
+            <PlaceObject2 replace="0" depth="1" objectID="1">
+                <transform>
+                    <Transform transX="0" transY="0"/>
+                </transform>
+            </PlaceObject2>
+            <ShowFrame/>
+            <End/>
+        </tags>
+    </Header>
+</swf>
