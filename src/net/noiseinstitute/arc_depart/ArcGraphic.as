@@ -30,7 +30,7 @@ package net.noiseinstitute.arc_depart {
 
         public var angle:Number = 0;
         public var radius:Number = SPRITE_RADIUS;
-        public var color:uint = 0xfb4426;
+        public var color:uint = 0x3a94e1;
 
         public function ArcGraphic() {
             var whiteSprite:Sprite = new ARC_SPRITE;
@@ -54,9 +54,9 @@ package net.noiseinstitute.arc_depart {
             matrix.translate(point.x, point.y);
             matrix.translate(-camera.x, -camera.y);
 
-            colorTransform.redMultiplier = FP.getRed(color);
-            colorTransform.greenMultiplier = FP.getGreen(color);
-            colorTransform.blueMultiplier = FP.getBlue(color);
+            colorTransform.redMultiplier = FP.getRed(color) / 256;
+            colorTransform.greenMultiplier = FP.getGreen(color) / 256;
+            colorTransform.blueMultiplier = FP.getBlue(color) / 256;
 
             glowSprite.transform.colorTransform = colorTransform;
             colorSprite.transform.colorTransform = colorTransform;
