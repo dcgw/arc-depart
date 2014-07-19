@@ -27,7 +27,7 @@
   <g stroke="#fb4426">
     <g filter="url(#blur)">
       <use xlink:href="#a" x="48" y="24"/>
-      <use xlink:href="#r" x="102" y="24"/>
+      <use xlink:href="#r" x="104" y="24"/>
       <use xlink:href="#c" x="160" y="24"/>
       <use xlink:href="#d" x="272" y="24"/>
       <use xlink:href="#e" x="328" y="24"/>
@@ -37,7 +37,7 @@
       <use xlink:href="#t" x="552" y="24"/>
     </g>
     <use xlink:href="#a" x="48" y="24"/>
-    <use xlink:href="#r" x="102" y="24"/>
+    <use xlink:href="#r" x="104" y="24"/>
     <use xlink:href="#c" x="160" y="24"/>
     <use xlink:href="#d" x="272" y="24"/>
     <use xlink:href="#e" x="328" y="24"/>
@@ -48,7 +48,7 @@
   </g>
   <g stroke="#fff" opacity="0.5">
     <use xlink:href="#a" x="48" y="24"/>
-    <use xlink:href="#r" x="102" y="24"/>
+    <use xlink:href="#r" x="104" y="24"/>
     <use xlink:href="#c" x="160" y="24"/>
     <use xlink:href="#d" x="272" y="24"/>
     <use xlink:href="#e" x="328" y="24"/>
