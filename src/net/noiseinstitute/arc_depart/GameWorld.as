@@ -21,10 +21,11 @@ package net.noiseinstitute.arc_depart {
             add(ship);
 
             var title:Title = new Title;
+            title.y = -212;
             add(title);
 
             camera.x = -Main.WIDTH * 0.5;
-            camera.y = -Main.HEIGHT * 0.5;
+            camera.y = -Main.HEIGHT * 0.5 - 16;
         }
 
         override public function begin():void {
