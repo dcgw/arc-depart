@@ -20,6 +20,9 @@ package net.noiseinstitute.arc_depart {
             var ship:Ship = new Ship;
             add(ship);
 
+            var title:Title = new Title;
+            add(title);
+
             camera.x = -Main.WIDTH * 0.5;
             camera.y = -Main.HEIGHT * 0.5;
         }
