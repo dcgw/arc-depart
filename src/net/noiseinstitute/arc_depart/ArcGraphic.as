@@ -14,27 +14,33 @@ package net.noiseinstitute.arc_depart {
 
     public final class ArcGraphic extends Graphic {
         [Embed("/arc.swf")]
-        private static const SPRITE:Class;
+        private static const ARC_SPRITE:Class;
 
         private static const SPRITE_RADIUS:Number = 192;
         private static const SPRITE_CENTER_X:Number = 208;
         private static const SPRITE_CENTER_Y:Number = 208;
 
-        private var sprite:Sprite = new SPRITE;
+        private var compositeSprite:Sprite = new Sprite;
+        private var glowSprite:Sprite = new ARC_SPRITE;
+        private var colorSprite:Sprite = new ARC_SPRITE;
+
         private var matrix:Matrix = new Matrix;
 
         private var colorTransform:ColorTransform = new ColorTransform;
-        private var whiteColorTransform:ColorTransform = new ColorTransform;
-
-        private var noFilters:Array = [];
-        private var blurFilters:Array = [new BlurFilter(8, 8, BitmapFilterQuality.HIGH)];
 
         public var angle:Number = 0;
         public var radius:Number = SPRITE_RADIUS;
         public var color:uint = 0xfb4426;
 
         public function ArcGraphic() {
-            whiteColorTransform.alphaMultiplier = 0.5;
+            var whiteSprite:Sprite = new ARC_SPRITE;
+
+            glowSprite.filters = [new BlurFilter(8, 8, BitmapFilterQuality.HIGH)];
+            whiteSprite.transform.colorTransform = new ColorTransform(1, 1, 1, 0.5);
+
+            compositeSprite.addChild(glowSprite);
+            compositeSprite.addChild(colorSprite);
+            compositeSprite.addChild(whiteSprite);
         }
 
         override public function render(target:BitmapData, point:Point, camera:Point):void {
@@ -52,14 +58,10 @@ package net.noiseinstitute.arc_depart {
             colorTransform.greenMultiplier = FP.getGreen(color);
             colorTransform.blueMultiplier = FP.getBlue(color);
 
-            sprite.filters = blurFilters;
+            glowSprite.transform.colorTransform = colorTransform;
+            colorSprite.transform.colorTransform = colorTransform;
 
-            target.draw(sprite, matrix, colorTransform, BlendMode.ADD, null, true);
-
-            sprite.filters = noFilters;
-
-            target.draw(sprite, matrix, colorTransform, BlendMode.ADD, null, true);
-            target.draw(sprite, matrix, whiteColorTransform, BlendMode.ADD, null, true);
+            target.draw(compositeSprite, matrix, null, BlendMode.ADD, null, true);
         }
     }
 }
