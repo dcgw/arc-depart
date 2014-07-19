@@ -3,15 +3,14 @@ package net.noiseinstitute.arc_depart {
 
     public class GameWorld extends World {
         public function GameWorld() {
-            var ship:Ship = new Ship();
-            ship.x = Main.WIDTH * 0.5;
-            ship.y = Main.HEIGHT * 0.5;
+            var ship:Ship = new Ship;
             add(ship);
 
             var arc:Arc = new Arc;
-            arc.x = Main.WIDTH * 0.5;
-            arc.y = Main.HEIGHT * 0.5;
             add(arc);
+
+            camera.x = -Main.WIDTH * 0.5;
+            camera.y = -Main.HEIGHT * 0.5;
         }
     }
 }
