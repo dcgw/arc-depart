@@ -13,7 +13,7 @@ package net.noiseinstitute.arc_depart {
         [Embed(source="/ship-mask.png")]
         private static const MASK_IMAGE:Class;
 
-        [Embed(source="/ship-additive.jpg")]
+        [Embed(source="/ship-additive.png")]
         private static const ADDITIVE_IMAGE:Class;
 
         private static const TURN_RATE:Number = 180 / Main.LOGIC_FPS; // degrees per frame
