@@ -2,6 +2,8 @@ package net.noiseinstitute.arc_depart {
     import flash.display.BitmapData;
     import flash.display.BlendMode;
     import flash.display.Sprite;
+    import flash.filters.BitmapFilterQuality;
+    import flash.filters.BlurFilter;
     import flash.geom.ColorTransform;
     import flash.geom.Matrix;
     import flash.geom.Point;
@@ -20,11 +22,20 @@ package net.noiseinstitute.arc_depart {
 
         private var sprite:Sprite = new SPRITE;
         private var matrix:Matrix = new Matrix;
+
         private var colorTransform:ColorTransform = new ColorTransform;
+        private var whiteColorTransform:ColorTransform = new ColorTransform;
+
+        private var noFilters:Array = [];
+        private var blurFilters:Array = [new BlurFilter(8, 8, BitmapFilterQuality.HIGH)];
 
         public var angle:Number = 0;
         public var radius:Number = SPRITE_RADIUS;
         public var color:uint = 0xfb4426;
+
+        public function ArcGraphic() {
+            whiteColorTransform.alphaMultiplier = 0.5;
+        }
 
         override public function render(target:BitmapData, point:Point, camera:Point):void {
             var scale:Number = radius / SPRITE_RADIUS;
@@ -41,7 +52,14 @@ package net.noiseinstitute.arc_depart {
             colorTransform.greenMultiplier = FP.getGreen(color);
             colorTransform.blueMultiplier = FP.getBlue(color);
 
+            sprite.filters = blurFilters;
+
             target.draw(sprite, matrix, colorTransform, BlendMode.ADD, null, true);
+
+            sprite.filters = noFilters;
+
+            target.draw(sprite, matrix, colorTransform, BlendMode.ADD, null, true);
+            target.draw(sprite, matrix, whiteColorTransform, BlendMode.ADD, null, true);
         }
     }
 }
