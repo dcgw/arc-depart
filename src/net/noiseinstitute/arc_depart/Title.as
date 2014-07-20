@@ -132,12 +132,14 @@ package net.noiseinstitute.arc_depart {
         }
 
         public function hide():void {
-            tweener.addTween(hideTween);
+            if (!hideTween.active) {
+                tweener.addTween(hideTween);
 
-            hideTween.tween(hideTweenState, {
-                alpha: 0,
-                yOffset: 32
-            }, 0.3 * Main.LOGIC_FPS, Ease.cubeOut);
+                hideTween.tween(hideTweenState, {
+                    alpha: 0,
+                    yOffset: 32
+                }, 0.3 * Main.LOGIC_FPS, Ease.cubeOut);
+            }
         }
 
         private function onHideComplete():void {
