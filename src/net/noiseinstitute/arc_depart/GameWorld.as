@@ -4,6 +4,7 @@ package net.noiseinstitute.arc_depart {
     import flash.media.SoundTransform;
 
     import net.flashpunk.World;
+    import net.flashpunk.utils.Input;
 
     public class GameWorld extends World {
         [Embed("/ingame-music.mp3")]
@@ -13,13 +14,17 @@ package net.noiseinstitute.arc_depart {
         private var musicSoundTransform:SoundTransform = new SoundTransform(0.5);
         private var musicSoundChannel:SoundChannel;
 
+        private var playing:Boolean;
+
+        private var ship:Ship = new Ship;
+
         private var title:Title = new Title;
 
         public function GameWorld() {
             var arc:Arc = new Arc;
             add(arc);
 
-            var ship:Ship = new Ship;
+            ship.active = false;
             add(ship);
 
             addGraphic(title);
@@ -29,9 +34,19 @@ package net.noiseinstitute.arc_depart {
         }
 
         override public function begin():void {
-            musicSoundChannel = music.play(0, int.MAX_VALUE, musicSoundTransform);
-
             title.show();
+        }
+
+        override public function update():void {
+            if (!playing && Input.pressed(Main.INPUT_THRUST)) {
+                playing = true;
+
+                musicSoundChannel = music.play(0, int.MAX_VALUE, musicSoundTransform);
+                ship.active = true;
+                title.hide();
+            }
+
+            super.update();
         }
 
         override public function end():void {
