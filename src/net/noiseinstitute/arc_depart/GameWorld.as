@@ -13,6 +13,8 @@ package net.noiseinstitute.arc_depart {
         private var musicSoundTransform:SoundTransform = new SoundTransform(0.5);
         private var musicSoundChannel:SoundChannel;
 
+        private var title:Title = new Title;
+
         public function GameWorld() {
             var arc:Arc = new Arc;
             add(arc);
@@ -20,9 +22,7 @@ package net.noiseinstitute.arc_depart {
             var ship:Ship = new Ship;
             add(ship);
 
-            var title:Title = new Title;
-            title.y = -212;
-            add(title);
+            addGraphic(title);
 
             camera.x = -Main.WIDTH * 0.5;
             camera.y = -Main.HEIGHT * 0.5 - 16;
@@ -30,6 +30,8 @@ package net.noiseinstitute.arc_depart {
 
         override public function begin():void {
             musicSoundChannel = music.play(0, int.MAX_VALUE, musicSoundTransform);
+
+            title.show();
         }
 
         override public function end():void {
