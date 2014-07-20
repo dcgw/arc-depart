@@ -108,27 +108,35 @@ package net.noiseinstitute.arc_depart {
         }
 
         public function show():void {
-            hideTween.cancel();
-            hideTweenState.alpha = 1;
-            hideTweenState.yOffset = 0;
-            visible = true;
+            if (hideTween.active) {
+                hideTween.cancel();
 
-            for (var i:int = 0; i < LETTER_COUNT; ++i) {
-                var tween:MultiVarTween = letterTweens[i];
-                var letterTweenState:Object = letterTweenStates[i];
+                tweener.addTween(hideTween);
 
-                if (tween != null && letterTweenState != null) {
-                    letterTweenState.blur = 32;
-                    letterTweenState.scale = 0.8;
-                    letterTweenState.alpha = 0;
+                hideTween.tween(hideTweenState, {
+                    alpha: 1,
+                    yOffset: 0
+                }, 0.3 * Main.LOGIC_FPS, Ease.cubeIn);
+            } else {
+                for (var i:int = 0; i < LETTER_COUNT; ++i) {
+                    var tween:MultiVarTween = letterTweens[i];
+                    var letterTweenState:Object = letterTweenStates[i];
 
-                    tween.tween(letterTweenState, {
-                        blur: 0,
-                        scale: 1,
-                        alpha: 1
-                    }, 0.8 * Main.LOGIC_FPS, Ease.cubeOut, 60 / 140 * 0.125 * i * Main.LOGIC_FPS);
+                    if (tween != null && letterTweenState != null) {
+                        letterTweenState.blur = 32;
+                        letterTweenState.scale = 0.8;
+                        letterTweenState.alpha = 0;
+
+                        tween.tween(letterTweenState, {
+                            blur: 0,
+                            scale: 1,
+                            alpha: 1
+                        }, 0.8 * Main.LOGIC_FPS, Ease.cubeOut, 60 / 140 * 0.125 * i * Main.LOGIC_FPS);
+                    }
                 }
             }
+
+            visible = true;
         }
 
         public function hide():void {
