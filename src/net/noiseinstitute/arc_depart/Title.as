@@ -8,15 +8,9 @@ package net.noiseinstitute.arc_depart {
     import flash.geom.Point;
 
     import net.flashpunk.Graphic;
-    import net.flashpunk.Tween;
     import net.flashpunk.Tweener;
     import net.flashpunk.tweens.misc.MultiVarTween;
-    import net.flashpunk.tweens.misc.NumTween;
-    import net.flashpunk.tweens.misc.VarTween;
     import net.flashpunk.utils.Ease;
-    import net.noiseinstitute.basecode.Range;
-    import net.noiseinstitute.basecode.Static;
-    import net.noiseinstitute.basecode.VectorMath;
 
     public final class Title extends Graphic {
         [Embed(source="/a.png")]
@@ -60,7 +54,8 @@ package net.noiseinstitute.arc_depart {
         private var matrices:Vector.<Matrix> = new <Matrix>[];
 
         private var tweener:Tweener = new Tweener;
-        private var fadeInTweens:Vector.<NumTween> = new <NumTween>[];
+        private var tweens:Vector.<MultiVarTween> = new <MultiVarTween>[];
+        private var tweenStates:Vector.<Object> = new <Object>[];
 
         private var matrix:Matrix = new Matrix;
 
@@ -81,14 +76,21 @@ package net.noiseinstitute.arc_depart {
 
                     compositeSprite.addChild(letterBitmap);
 
-                    var fadeInTween:NumTween = new NumTween;
-                    tweener.addTween(fadeInTween);
-                    fadeInTweens[i] = fadeInTween;
+                    var tween:MultiVarTween = new MultiVarTween;
+                    tweener.addTween(tween);
+                    tweens[i] = tween;
+
+                    tweenStates[i] = {
+                        blur: 0,
+                        scale: 0,
+                        alpha: 0
+                    };
                 } else {
                     blurFilters[i] = null;
                     filters[i] = null;
                     matrices[i] = null;
-                    fadeInTweens[i] = null;
+                    tweens[i] = null;
+                    tweenStates[i] = null;
                 }
             }
 
@@ -101,11 +103,19 @@ package net.noiseinstitute.arc_depart {
             }
 
             for (var i:int = 0; i < LETTER_COUNT; ++i) {
-                var fadeInTween:NumTween = fadeInTweens[i];
+                var tween:MultiVarTween = tweens[i];
+                var tweenState:Object = tweenStates[i];
 
-                if (fadeInTween != null) {
-                    fadeInTween.tween(0, 1, 0.8 * Main.LOGIC_FPS);
-                    fadeInTween.delay = 60 / 140 * 0.25 * i * Main.LOGIC_FPS;
+                if (tween != null && tweenState != null) {
+                    tweenState.blur = 32;
+                    tweenState.scale = 0.8;
+                    tweenState.alpha = 0;
+
+                    tween.tween(tweenState, {
+                        blur: 0,
+                        scale: 1,
+                        alpha: 1
+                    }, 0.8 * Main.LOGIC_FPS, Ease.cubeOut, 60 / 140 * 0.25 * i * Main.LOGIC_FPS);
                 }
             }
 
@@ -120,27 +130,22 @@ package net.noiseinstitute.arc_depart {
                 var bitmapFilters:Array = filters[i];
                 var blurFilter:BlurFilter = blurFilters[i];
                 var matrix:Matrix = matrices[i];
-                var fadeInTween:NumTween = fadeInTweens[i];
+                var tweenState:Object = tweenStates[i];
 
-                if (letterBitmap != null && blurFilter != null && bitmapFilters != null && fadeInTween != null) {
-                    blurFilter.blurX = (1 - Ease.cubeInOut(fadeInTween.value)) * 16;
-                    blurFilter.blurY = (1 - Ease.cubeInOut(fadeInTween.value)) * 16;
+                if (letterBitmap != null && bitmapFilters != null && blurFilter != null
+                        && matrix != null && tweenState != null) {
+                    blurFilter.blurX = tweenState.blur;
+                    blurFilter.blurY = tweenState.blur;
 
                     letterBitmap.filters = bitmapFilters;
-                }
 
-                if (letterBitmap != null && matrix != null && fadeInTween != null) {
                     matrix.identity();
                     translateLetterPosition(matrix, i);
-
-                    var scale:Number = 0.8 + (0.2 * Ease.cubeOut(fadeInTween.value));
-                    matrix.scale(scale, scale);
+                    matrix.scale(tweenState.scale, tweenState.scale);
 
                     letterBitmap.transform.matrix = matrix;
-                }
 
-                if (letterBitmap != null && fadeInTween != null) {
-                    letterBitmap.alpha = Ease.cubeOut(fadeInTween.value);
+                    letterBitmap.alpha = tweenState.alpha;
                 }
             }
 
