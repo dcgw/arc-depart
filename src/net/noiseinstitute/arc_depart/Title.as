@@ -4,6 +4,7 @@ package net.noiseinstitute.arc_depart {
     import flash.display.BlendMode;
     import flash.display.Sprite;
     import flash.filters.BlurFilter;
+    import flash.geom.ColorTransform;
     import flash.geom.Matrix;
     import flash.geom.Point;
 
@@ -54,10 +55,19 @@ package net.noiseinstitute.arc_depart {
         private var matrices:Vector.<Matrix> = new <Matrix>[];
 
         private var tweener:Tweener = new Tweener;
-        private var tweens:Vector.<MultiVarTween> = new <MultiVarTween>[];
-        private var tweenStates:Vector.<Object> = new <Object>[];
+        private var letterTweens:Vector.<MultiVarTween> = new <MultiVarTween>[];
+        private var letterTweenStates:Vector.<Object> = new <Object>[];
 
         private var matrix:Matrix = new Matrix;
+
+        private var colorTransform:ColorTransform = new ColorTransform;
+
+        private var hideTween:MultiVarTween = new MultiVarTween(onHideComplete);
+
+        private var hideTweenState:Object = {
+            alpha: 1,
+            yOffset: 0
+        };
 
         public function Title() {
             for (var i:int = 0; i < LETTER_COUNT; ++i) {
@@ -76,11 +86,11 @@ package net.noiseinstitute.arc_depart {
 
                     compositeSprite.addChild(letterBitmap);
 
-                    var tween:MultiVarTween = new MultiVarTween;
-                    tweener.addTween(tween);
-                    tweens[i] = tween;
+                    var letterTween:MultiVarTween = new MultiVarTween;
+                    tweener.addTween(letterTween);
+                    letterTweens[i] = letterTween;
 
-                    tweenStates[i] = {
+                    letterTweenStates[i] = {
                         blur: 0,
                         scale: 0,
                         alpha: 0
@@ -89,8 +99,8 @@ package net.noiseinstitute.arc_depart {
                     blurFilters[i] = null;
                     filters[i] = null;
                     matrices[i] = null;
-                    tweens[i] = null;
-                    tweenStates[i] = null;
+                    letterTweens[i] = null;
+                    letterTweenStates[i] = null;
                 }
             }
 
@@ -98,28 +108,40 @@ package net.noiseinstitute.arc_depart {
         }
 
         public function show():void {
-            if (visible) {
-                return;
-            }
+            hideTween.cancel();
+            hideTweenState.alpha = 1;
+            hideTweenState.yOffset = 0;
+            visible = true;
 
             for (var i:int = 0; i < LETTER_COUNT; ++i) {
-                var tween:MultiVarTween = tweens[i];
-                var tweenState:Object = tweenStates[i];
+                var tween:MultiVarTween = letterTweens[i];
+                var letterTweenState:Object = letterTweenStates[i];
 
-                if (tween != null && tweenState != null) {
-                    tweenState.blur = 32;
-                    tweenState.scale = 0.8;
-                    tweenState.alpha = 0;
+                if (tween != null && letterTweenState != null) {
+                    letterTweenState.blur = 32;
+                    letterTweenState.scale = 0.8;
+                    letterTweenState.alpha = 0;
 
-                    tween.tween(tweenState, {
+                    tween.tween(letterTweenState, {
                         blur: 0,
                         scale: 1,
                         alpha: 1
                     }, 0.8 * Main.LOGIC_FPS, Ease.cubeOut, 60 / 140 * 0.25 * i * Main.LOGIC_FPS);
                 }
             }
+        }
 
-            visible = true;
+        public function hide():void {
+            tweener.addTween(hideTween);
+
+            hideTween.tween(hideTweenState, {
+                alpha: 0,
+                yOffset: 32
+            }, 0.3 * Main.LOGIC_FPS, Ease.cubeOut);
+        }
+
+        private function onHideComplete():void {
+            visible = false;
         }
 
         override public function render(target:BitmapData, point:Point, camera:Point):void {
@@ -130,7 +152,7 @@ package net.noiseinstitute.arc_depart {
                 var bitmapFilters:Array = filters[i];
                 var blurFilter:BlurFilter = blurFilters[i];
                 var matrix:Matrix = matrices[i];
-                var tweenState:Object = tweenStates[i];
+                var tweenState:Object = letterTweenStates[i];
 
                 if (letterBitmap != null && bitmapFilters != null && blurFilter != null
                         && matrix != null && tweenState != null) {
@@ -152,9 +174,12 @@ package net.noiseinstitute.arc_depart {
             this.matrix.identity();
             this.matrix.translate(point.x, point.y);
             this.matrix.translate(x, y);
+            this.matrix.translate(0, hideTweenState.yOffset);
             this.matrix.translate(-camera.x, -camera.y);
 
-            target.draw(compositeSprite, this.matrix, null, null, null, true);
+            colorTransform.alphaMultiplier = hideTweenState.alpha;
+
+            target.draw(compositeSprite, this.matrix, colorTransform, null, null, true);
         }
 
         private static function translateLetterPosition(matrix:Matrix, letterIndex:int):void {
