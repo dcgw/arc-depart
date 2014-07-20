@@ -126,7 +126,7 @@ package net.noiseinstitute.arc_depart {
                         blur: 0,
                         scale: 1,
                         alpha: 1
-                    }, 0.8 * Main.LOGIC_FPS, Ease.cubeOut, 60 / 140 * 0.25 * i * Main.LOGIC_FPS);
+                    }, 0.8 * Main.LOGIC_FPS, Ease.cubeOut, 60 / 140 * 0.125 * i * Main.LOGIC_FPS);
                 }
             }
         }
