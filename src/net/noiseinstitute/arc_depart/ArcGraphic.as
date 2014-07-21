@@ -11,6 +11,7 @@ package net.noiseinstitute.arc_depart {
     import net.flashpunk.FP;
 
     import net.flashpunk.Graphic;
+    import net.noiseinstitute.basecode.Range;
 
     public final class ArcGraphic extends Graphic {
         [Embed("/arc.swf")]
@@ -20,6 +21,8 @@ package net.noiseinstitute.arc_depart {
         private static const SPRITE_CENTER_X:Number = 208;
         private static const SPRITE_CENTER_Y:Number = 208;
 
+        private static const FADE_START_RADIUS:Number = 32;
+
         private var compositeSprite:Sprite = new Sprite;
         private var glowSprite:Sprite = new ARC_SPRITE;
         private var colorSprite:Sprite = new ARC_SPRITE;
@@ -27,6 +30,7 @@ package net.noiseinstitute.arc_depart {
         private var matrix:Matrix = new Matrix;
 
         private var colorTransform:ColorTransform = new ColorTransform;
+        private var compositeColorTransform:ColorTransform = new ColorTransform;
 
         public var angle:Number = 0;
         public var radius:Number = SPRITE_RADIUS;
@@ -61,7 +65,9 @@ package net.noiseinstitute.arc_depart {
             glowSprite.transform.colorTransform = colorTransform;
             colorSprite.transform.colorTransform = colorTransform;
 
-            target.draw(compositeSprite, matrix, null, BlendMode.ADD, null, true);
+            compositeColorTransform.alphaMultiplier = Range.clip(radius / FADE_START_RADIUS, 0, 1);
+
+            target.draw(compositeSprite, matrix, compositeColorTransform, BlendMode.ADD, null, true);
         }
     }
 }
