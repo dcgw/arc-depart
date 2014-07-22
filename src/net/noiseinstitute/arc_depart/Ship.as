@@ -6,8 +6,11 @@ package net.noiseinstitute.arc_depart {
     import flash.media.SoundTransform;
 
     import net.flashpunk.Entity;
+    import net.flashpunk.Tweener;
     import net.flashpunk.graphics.Graphiclist;
     import net.flashpunk.graphics.Image;
+    import net.flashpunk.tweens.misc.MultiVarTween;
+    import net.flashpunk.utils.Ease;
     import net.flashpunk.utils.Input;
     import net.noiseinstitute.basecode.Range;
     import net.noiseinstitute.basecode.Static;
@@ -19,6 +22,9 @@ package net.noiseinstitute.arc_depart {
 
         [Embed(source="/ship-additive.png")]
         private static const ADDITIVE_IMAGE:Class;
+
+        [Embed(source="/ship-beat-glow.png")]
+        private static const BEAT_GLOW_IMAGE:Class;
 
         [Embed(source="/thrust.mp3")]
         private static const THRUST_SOUND:Class;
@@ -33,8 +39,12 @@ package net.noiseinstitute.arc_depart {
         private static const THRUST_FADE_IN_RATE:Number = THRUST_VOLUME / THRUST_FADE_IN_TIME; // volume per frame
         private static const THRUST_FADE_OUT_RATE:Number = THRUST_VOLUME / THRUST_FADE_OUT_TIME; // volume per frame
 
-        private var maskImage:Image;
-        private var additiveImage:Image;
+        private static const BEAT_INTERVAL:Number = 4 * 60 / 140 * Main.LOGIC_FPS; // Time in frames.
+        private static const BEAT_GLOW_TIME:Number = 2 * 60 / 140 * Main.LOGIC_FPS; // Time in frames.
+
+        private var maskImage:Image = new Image(MASK_IMAGE);
+        private var beatGlowImage:Image = new Image(BEAT_GLOW_IMAGE);
+        private var additiveImage:Image = new Image(ADDITIVE_IMAGE);
 
         private var thrustSound:Sound = new THRUST_SOUND;
         private var thrustSoundTransform:SoundTransform = new SoundTransform;
@@ -43,17 +53,28 @@ package net.noiseinstitute.arc_depart {
         private var angle:Number = 0;
         private var velocity:Point = new Point;
 
+        private var frame:int = 0;
+        private var lastBeatFrame:int = 0;
+
+        private var tweener:Tweener = new Tweener;
+        private var beatGlowTween:MultiVarTween = new MultiVarTween;
+
         public function Ship() {
-            maskImage = new Image(MASK_IMAGE);
             maskImage.centerOrigin();
             maskImage.smooth = true;
 
-            additiveImage = new Image(ADDITIVE_IMAGE);
+            beatGlowImage.centerOrigin();
+            beatGlowImage.blend = BlendMode.ADD;
+            beatGlowImage.alpha = 0;
+            beatGlowImage.smooth = true;
+
             additiveImage.centerOrigin();
             additiveImage.blend = BlendMode.ADD;
             additiveImage.smooth = true;
 
-            graphic = new Graphiclist(maskImage, additiveImage);
+            graphic = new Graphiclist(maskImage, beatGlowImage, additiveImage);
+
+            tweener.addTween(beatGlowTween);
         }
 
         override public function added():void {
@@ -90,10 +111,27 @@ package net.noiseinstitute.arc_depart {
             velocity.y += GRAVITY;
 
             maskImage.angle = angle;
+            beatGlowImage.angle = angle;
             additiveImage.angle = angle;
 
             x += velocity.x;
             y += velocity.y;
+
+            ++frame;
+
+            if (frame - lastBeatFrame >= BEAT_INTERVAL) {
+                lastBeatFrame += BEAT_INTERVAL;
+
+                beatGlowImage.alpha = 1;
+                beatGlowImage.scale = 0.5;
+
+                beatGlowTween.tween(beatGlowImage, {
+                    alpha: 0,
+                    scale: 1
+                }, BEAT_GLOW_TIME, Ease.quintOut);
+            }
+
+            tweener.updateTweens();
         }
 
         override public function removed():void {
