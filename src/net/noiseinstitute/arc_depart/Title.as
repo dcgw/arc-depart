@@ -41,6 +41,9 @@ package net.noiseinstitute.arc_depart {
         private static const LETTER_SPACING:Number = 16;
         private static const LETTER_MARGIN:Number = 16;
 
+        private static const LETTER_FADE_IN_TIME:Number = 0.8 * Main.LOGIC_FPS; // Time in frames.
+        private static const LETTER_FADE_IN_DELAY:Number = 60 / 140 * 0.125 * Main.LOGIC_FPS; // Time in frames.
+
         private static const TITLE_WIDTH:Number = LETTER_COUNT * (LETTER_WIDTH + LETTER_SPACING) - LETTER_SPACING;
         private static const TITLE_LEFT:Number = -TITLE_WIDTH * 0.5;
         private static const TITLE_Y:Number = -212;
@@ -131,7 +134,7 @@ package net.noiseinstitute.arc_depart {
                             blur: 0,
                             scale: 1,
                             alpha: 1
-                        }, 0.8 * Main.LOGIC_FPS, Ease.cubeOut, 60 / 140 * 0.125 * i * Main.LOGIC_FPS);
+                        }, LETTER_FADE_IN_TIME, Ease.cubeOut, LETTER_FADE_IN_DELAY * i);
                     }
                 }
             }
