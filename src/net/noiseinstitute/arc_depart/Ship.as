@@ -39,7 +39,6 @@ package net.noiseinstitute.arc_depart {
         private static const THRUST_FADE_IN_RATE:Number = THRUST_VOLUME / THRUST_FADE_IN_TIME; // volume per frame
         private static const THRUST_FADE_OUT_RATE:Number = THRUST_VOLUME / THRUST_FADE_OUT_TIME; // volume per frame
 
-        private static const BEAT_INTERVAL:Number = 4 * 60 / 140 * Main.LOGIC_FPS; // Time in frames.
         private static const BEAT_GLOW_TIME:Number = 2 * 60 / 140 * Main.LOGIC_FPS; // Time in frames.
 
         private var maskImage:Image = new Image(MASK_IMAGE);
@@ -52,9 +51,6 @@ package net.noiseinstitute.arc_depart {
 
         private var angle:Number = 0;
         private var velocity:Point = new Point;
-
-        private var frame:int = 0;
-        private var lastBeatFrame:int = 0;
 
         private var tweener:Tweener = new Tweener;
         private var beatGlowTween:MultiVarTween = new MultiVarTween;
@@ -80,6 +76,18 @@ package net.noiseinstitute.arc_depart {
         override public function added():void {
             thrustSoundTransform.volume = 0;
             thrustSoundChannel = thrustSound.play(0, int.MAX_VALUE, thrustSoundTransform);
+        }
+
+        public function beat(beatCount:int):void {
+            if (beatCount % 2 == 1) {
+                beatGlowImage.alpha = 1;
+                beatGlowImage.scale = 0.5;
+
+                beatGlowTween.tween(beatGlowImage, {
+                    alpha: 0,
+                    scale: 1
+                }, BEAT_GLOW_TIME, Ease.cubeOut);
+            }
         }
 
         override public function update():void {
@@ -116,20 +124,6 @@ package net.noiseinstitute.arc_depart {
 
             x += velocity.x;
             y += velocity.y;
-
-            ++frame;
-
-            if (frame - lastBeatFrame >= BEAT_INTERVAL) {
-                lastBeatFrame += BEAT_INTERVAL;
-
-                beatGlowImage.alpha = 1;
-                beatGlowImage.scale = 0.5;
-
-                beatGlowTween.tween(beatGlowImage, {
-                    alpha: 0,
-                    scale: 1
-                }, BEAT_GLOW_TIME, Ease.quintOut);
-            }
 
             tweener.updateTweens();
         }

@@ -1,18 +1,9 @@
 package net.noiseinstitute.arc_depart {
-    import flash.media.Sound;
-    import flash.media.SoundChannel;
-    import flash.media.SoundTransform;
-
     import net.flashpunk.World;
     import net.flashpunk.utils.Input;
 
     public class GameWorld extends World {
-        [Embed("/ingame-music.mp3")]
-        private static const MUSIC:Class;
-
-        private var music:Sound = new MUSIC;
-        private var musicSoundTransform:SoundTransform = new SoundTransform(0.5);
-        private var musicSoundChannel:SoundChannel;
+        private var music:GameMusic = new GameMusic;
 
         private var playing:Boolean;
 
@@ -31,6 +22,8 @@ package net.noiseinstitute.arc_depart {
 
             camera.x = -Main.WIDTH * 0.5;
             camera.y = -Main.HEIGHT * 0.5 - 16;
+
+            music.onBeat = onBeat;
         }
 
         override public function begin():void {
@@ -41,18 +34,22 @@ package net.noiseinstitute.arc_depart {
             if (!playing && Input.pressed(Main.INPUT_THRUST)) {
                 playing = true;
 
-                musicSoundChannel = music.play(0, int.MAX_VALUE, musicSoundTransform);
+                music.play();
                 ship.active = true;
                 title.hide();
             }
+
+            music.update();
 
             super.update();
         }
 
         override public function end():void {
-            if (musicSoundChannel != null) {
-                musicSoundChannel.stop();
-            }
+            music.stop();
+        }
+
+        private function onBeat(beatCount:int):void {
+            ship.beat(beatCount);
         }
     }
 }
