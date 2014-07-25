@@ -18,14 +18,18 @@ package net.noiseinstitute.arc_depart {
 
         private var shrinkRate:Number = 0;
 
+        private var cleared:Boolean = false;
+
         public function Arc(ship:Ship) {
             this.ship = ship;
             graphic = arcGraphic;
         }
 
         override public function update():void {
-            if (testCleared()) {
-                cleared();
+            if (!cleared && testCleared()) {
+                arcGraphic.glow();
+                shrinkRate = BASE_SHRINK_RATE;
+                cleared = true;
             }
 
             angle += angularVelocity;
@@ -44,10 +48,6 @@ package net.noiseinstitute.arc_depart {
             arcGraphic.radius = radius;
 
             super.render();
-        }
-
-        private function cleared():void {
-            shrinkRate = BASE_SHRINK_RATE;
         }
 
         private function testCleared():Boolean {
