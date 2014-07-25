@@ -39,7 +39,7 @@ package net.noiseinstitute.arc_depart {
         public function ArcGraphic() {
             var whiteSprite:Sprite = new ARC_SPRITE;
 
-            glowSprite.filters = [new BlurFilter(8, 8, BitmapFilterQuality.HIGH)];
+            glowSprite.filters = [new BlurFilter(10, 10, BitmapFilterQuality.HIGH)];
             whiteSprite.transform.colorTransform = new ColorTransform(1, 1, 1, 0.5);
 
             compositeSprite.addChild(glowSprite);
