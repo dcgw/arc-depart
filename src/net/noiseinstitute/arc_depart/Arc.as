@@ -5,6 +5,7 @@ package net.noiseinstitute.arc_depart {
 
     public final class Arc extends Entity {
         private static const BASE_SHRINK_RATE:Number = 20 / Main.LOGIC_FPS; // Pixels per frame.
+
         private var arcGraphic:ArcGraphic = new ArcGraphic;
 
         private var angle:Number = 0;
