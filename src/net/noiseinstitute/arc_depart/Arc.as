@@ -7,6 +7,8 @@ package net.noiseinstitute.arc_depart {
         private static const BASE_SHRINK_RATE:Number = 20 / Main.LOGIC_FPS; // Pixels per frame.
         private var arcGraphic:ArcGraphic = new ArcGraphic;
 
+        private var angle:Number = 0;
+
         private var radius:Number = 192;
 
         private var ship:Ship;
@@ -19,15 +21,7 @@ package net.noiseinstitute.arc_depart {
         }
 
         override public function update():void {
-            Static.point.x = ship.x;
-            Static.point.y = ship.y;
-
-            Static.point2.x = x;
-            Static.point2.y = y;
-
-            VectorMath.subtractFrom(Static.point, Static.point2);
-
-            if (VectorMath.magnitude(Static.point) > radius) {
+            if (testCleared()) {
                 cleared();
             }
 
@@ -41,6 +35,7 @@ package net.noiseinstitute.arc_depart {
         }
 
         override public function render():void {
+            arcGraphic.angle = angle;
             arcGraphic.radius = radius;
 
             super.render();
@@ -48,6 +43,29 @@ package net.noiseinstitute.arc_depart {
 
         private function cleared():void {
             shrinkRate = BASE_SHRINK_RATE;
+        }
+
+        private function testCleared():Boolean {
+            VectorMath.becomePolar(Static.point, 30, radius);
+            VectorMath.becomeUnitVector(Static.point2, 0);
+
+            var exitDistance:Number = VectorMath.dot(Static.point, Static.point2);
+
+            Static.point.x = ship.x;
+            Static.point.y = ship.y;
+
+            Static.point2.x = x;
+            Static.point2.y = y;
+
+            VectorMath.subtractFrom(Static.point, Static.point2);
+
+            if (VectorMath.magnitude(Static.point) > radius) {
+                return true;
+            }
+
+            VectorMath.becomeUnitVector(Static.point2, angle);
+
+            return VectorMath.dot(Static.point, Static.point2) > exitDistance;
         }
     }
 }
