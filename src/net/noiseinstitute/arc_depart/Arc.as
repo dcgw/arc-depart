@@ -13,6 +13,8 @@ package net.noiseinstitute.arc_depart {
 
         private var ship:Ship;
 
+        private var angularVelocity:Number = 0 / Main.LOGIC_FPS; // Degrees per frame.
+
         private var shrinkRate:Number = 0;
 
         public function Arc(ship:Ship) {
@@ -24,6 +26,8 @@ package net.noiseinstitute.arc_depart {
             if (testCleared()) {
                 cleared();
             }
+
+            angle += angularVelocity;
 
             radius -= shrinkRate;
 
