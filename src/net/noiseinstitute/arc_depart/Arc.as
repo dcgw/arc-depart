@@ -12,7 +12,7 @@ package net.noiseinstitute.arc_depart {
 
         private var radius:Number = 192;
 
-        private var ship:Ship;
+        private var playerShip:PlayerShip;
 
         private var angularVelocity:Number = 0 / Main.LOGIC_FPS; // Degrees per frame.
 
@@ -20,8 +20,8 @@ package net.noiseinstitute.arc_depart {
 
         private var cleared:Boolean = false;
 
-        public function Arc(ship:Ship) {
-            this.ship = ship;
+        public function Arc(playerShip:PlayerShip) {
+            this.playerShip = playerShip;
             graphic = arcGraphic;
         }
 
@@ -56,8 +56,8 @@ package net.noiseinstitute.arc_depart {
 
             var exitDistance:Number = VectorMath.dot(Static.point, Static.point2);
 
-            Static.point.x = ship.x;
-            Static.point.y = ship.y;
+            Static.point.x = playerShip.x;
+            Static.point.y = playerShip.y;
 
             Static.point2.x = x;
             Static.point2.y = y;

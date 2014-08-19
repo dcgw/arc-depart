@@ -7,16 +7,16 @@ package net.noiseinstitute.arc_depart {
 
         private var playing:Boolean;
 
-        private var ship:Ship = new Ship;
+        private var playerShip:PlayerShip = new PlayerShip;
 
         private var title:Title = new Title;
 
         public function GameWorld() {
-            var arc:Arc = new Arc(ship);
+            var arc:Arc = new Arc(playerShip);
             add(arc);
 
-            ship.active = false;
-            add(ship);
+            playerShip.active = false;
+            add(playerShip);
 
             addGraphic(title);
 
@@ -35,7 +35,7 @@ package net.noiseinstitute.arc_depart {
                 playing = true;
 
                 music.play();
-                ship.active = true;
+                playerShip.active = true;
                 title.hide();
             }
 
@@ -49,7 +49,7 @@ package net.noiseinstitute.arc_depart {
         }
 
         private function onBeat(beatCount:int):void {
-            ship.beat(beatCount);
+            playerShip.beat(beatCount);
         }
     }
 }

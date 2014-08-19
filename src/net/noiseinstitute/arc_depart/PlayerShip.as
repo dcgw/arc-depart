@@ -16,7 +16,7 @@ package net.noiseinstitute.arc_depart {
     import net.noiseinstitute.basecode.Static;
     import net.noiseinstitute.basecode.VectorMath;
 
-    public final class Ship extends Entity {
+    public final class PlayerShip extends Entity {
         [Embed(source="/ship-mask.png")]
         private static const MASK_IMAGE:Class;
 
@@ -55,7 +55,7 @@ package net.noiseinstitute.arc_depart {
         private var tweener:Tweener = new Tweener;
         private var beatGlowTween:MultiVarTween = new MultiVarTween;
 
-        public function Ship() {
+        public function PlayerShip() {
             maskImage.centerOrigin();
             maskImage.smooth = true;
 
