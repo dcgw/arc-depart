@@ -12,8 +12,11 @@ package net.noiseinstitute.arc_depart {
         private var title:Title = new Title;
 
         public function GameWorld() {
-            var arc:Arc = new Arc(playerShip);
-            add(arc);
+            var arcSystem:ArcSystem = new ArcSystem(playerShip);
+
+            for each (var arc:Arc in arcSystem.arcs) {
+                add(arc);
+            }
 
             playerShip.active = false;
             add(playerShip);

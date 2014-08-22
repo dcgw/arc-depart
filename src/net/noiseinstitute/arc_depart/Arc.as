@@ -4,21 +4,23 @@ package net.noiseinstitute.arc_depart {
     import net.noiseinstitute.basecode.VectorMath;
 
     public final class Arc extends Entity {
-        private static const BASE_SHRINK_RATE:Number = 20 / Main.LOGIC_FPS; // Pixels per frame.
+        public var onCleared:Function;
+
+        public var onClosed:Function;
 
         private var arcGraphic:ArcGraphic = new ArcGraphic;
 
         private var angle:Number = 0;
 
-        private var radius:Number = 192;
-
         private var playerShip:PlayerShip;
 
-        private var angularVelocity:Number = 0 / Main.LOGIC_FPS; // Degrees per frame.
-
-        private var shrinkRate:Number = 0;
-
         private var cleared:Boolean = false;
+
+        public var radius:Number = 192;
+
+        public var shrinkRate:Number = 0; // Pixels per frame.
+
+        public var angularVelocity:Number = 0; // Degrees per frame.
 
         public function Arc(playerShip:PlayerShip) {
             this.playerShip = playerShip;
@@ -28,8 +30,11 @@ package net.noiseinstitute.arc_depart {
         override public function update():void {
             if (!cleared && testCleared()) {
                 arcGraphic.glow();
-                shrinkRate = BASE_SHRINK_RATE;
                 cleared = true;
+
+                if (onCleared != null) {
+                    onCleared();
+                }
             }
 
             angle += angularVelocity;
@@ -40,6 +45,10 @@ package net.noiseinstitute.arc_depart {
                 radius = 0;
                 active = false;
                 visible = false;
+
+                if (onClosed != null) {
+                    onClosed();
+                }
             }
         }
 
