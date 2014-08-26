@@ -9,6 +9,9 @@ package net.noiseinstitute.arc_depart {
         public static const WIDTH:int = 640;
         public static const HEIGHT:int = 480;
 
+        public static const CENTER_X:int = WIDTH * 0.5;
+        public static const CENTER_Y:int = HEIGHT * 0.5;
+
         public static const INPUT_LEFT:String = "left";
         public static const INPUT_RIGHT:String = "right";
         public static const INPUT_THRUST:String = "thrust";

@@ -15,6 +15,8 @@ package net.noiseinstitute.arc_depart {
 
         private var playing:Boolean;
 
+        private var cameraMovement:CameraMovement;
+
         private var playerShip:PlayerShip = new PlayerShip;
 
         private var title:Title = new Title;
@@ -40,8 +42,11 @@ package net.noiseinstitute.arc_depart {
 
             addGraphic(title);
 
-            camera.x = -Main.WIDTH * 0.5;
-            camera.y = -Main.HEIGHT * 0.5 - 16;
+            cameraMovement = new CameraMovement(camera, playerShip, arcSystem);
+            cameraMovement.update();
+
+//            camera.x = -Main.WIDTH * 0.5;
+//            camera.y = -Main.HEIGHT * 0.5 - 16;
 
             music.onBeat = onBeat;
         }
@@ -62,6 +67,8 @@ package net.noiseinstitute.arc_depart {
             music.update();
 
             super.update();
+
+            cameraMovement.update();
         }
 
         override public function render():void {

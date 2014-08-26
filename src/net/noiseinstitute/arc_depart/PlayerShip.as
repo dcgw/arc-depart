@@ -49,8 +49,8 @@ package net.noiseinstitute.arc_depart {
         private var thrustSoundTransform:SoundTransform = new SoundTransform;
         private var thrustSoundChannel:SoundChannel;
 
-        private var angle:Number = 0;
-        private var velocity:Point = new Point;
+        public var angle:Number = 0;
+        public var velocity:Point = new Point;
 
         private var tweener:Tweener = new Tweener;
         private var beatGlowTween:MultiVarTween = new MultiVarTween;
