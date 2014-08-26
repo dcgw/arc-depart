@@ -30,15 +30,17 @@ package net.noiseinstitute.arc_depart {
 
         private static const ANIMATED_GLOW_DURATION:Number = 4 * 60 / 140 * Main.LOGIC_FPS; // Time in frames.
 
+        private var blurTarget:BitmapData;
+        private var bigBlurTarget:BitmapData;
+
         private var compositeSprite:Sprite = new Sprite;
-        private var animatedGlowSprite:Sprite = new ARC_SPRITE;
-        private var glowSprite:Sprite = new ARC_SPRITE;
         private var colorSprite:Sprite = new ARC_SPRITE;
 
         private var matrix:Matrix = new Matrix;
         private var animatedGlowMatrix:Matrix = new Matrix;
 
         private var colorTransform:ColorTransform = new ColorTransform;
+        private var glowColorTransform:ColorTransform = new ColorTransform;
         private var animatedGlowColorTransform:ColorTransform = new ColorTransform;
         private var compositeColorTransform:ColorTransform = new ColorTransform;
 
@@ -50,19 +52,18 @@ package net.noiseinstitute.arc_depart {
         public var radius:Number = SPRITE_RADIUS;
         public var color:uint = 0x3a94e1;
 
-        public function ArcGraphic() {
+        public function ArcGraphic(blurTarget:BitmapData, bigBlurTarget:BitmapData) {
+            this.blurTarget = blurTarget;
+            this.bigBlurTarget = bigBlurTarget;
+
             var whiteSprite:Sprite = new ARC_SPRITE;
 
-            glowSprite.filters = [new BlurFilter(10, 10, BitmapFilterQuality.HIGH)];
-            animatedGlowSprite.filters = [new BlurFilter(20, 20)];
             whiteSprite.transform.colorTransform = new ColorTransform(1, 1, 1, 0.5);
 
-            compositeSprite.addChild(glowSprite);
-            compositeSprite.addChild(animatedGlowSprite);
             compositeSprite.addChild(colorSprite);
             compositeSprite.addChild(whiteSprite);
 
-            animatedGlowAlphaTween.value = 1;
+            animatedGlowAlphaTween.value = 0;
             animatedGlowScaleTween.value = 0;
         }
 
@@ -81,24 +82,28 @@ package net.noiseinstitute.arc_depart {
             colorTransform.greenMultiplier = animatedGlowColorTransform.greenMultiplier = FP.getGreen(color) / 256;
             colorTransform.blueMultiplier = animatedGlowColorTransform.blueMultiplier = FP.getBlue(color) / 256;
 
+            glowColorTransform.redMultiplier = colorTransform.redMultiplier;
+            glowColorTransform.greenMultiplier = colorTransform.greenMultiplier;
+            glowColorTransform.blueMultiplier = colorTransform.blueMultiplier;
+
             tweener.updateTweens();
 
             animatedGlowColorTransform.alphaMultiplier = animatedGlowAlphaTween.value;
 
-            glowSprite.transform.colorTransform = colorTransform;
-            animatedGlowSprite.transform.colorTransform = animatedGlowColorTransform;
             colorSprite.transform.colorTransform = colorTransform;
 
             animatedGlowMatrix.identity();
             animatedGlowMatrix.translate(-SPRITE_CENTER_X, -SPRITE_CENTER_Y);
             animatedGlowMatrix.scale(animatedGlowScaleTween.value, animatedGlowScaleTween.value);
             animatedGlowMatrix.translate(SPRITE_CENTER_X, SPRITE_CENTER_Y);
-
-            animatedGlowSprite.transform.matrix = animatedGlowMatrix;
+            animatedGlowMatrix.concat(matrix);
 
             compositeColorTransform.alphaMultiplier = Range.clip(radius / FADE_START_RADIUS, 0, 1);
+            glowColorTransform.alphaMultiplier = compositeColorTransform.alphaMultiplier;
 
             target.draw(compositeSprite, matrix, compositeColorTransform, BlendMode.ADD, null, true);
+            blurTarget.draw(colorSprite, matrix, glowColorTransform, BlendMode.ADD, null, true);
+            bigBlurTarget.draw(colorSprite, animatedGlowMatrix, animatedGlowColorTransform, BlendMode.ADD, null, true);
         }
 
         public function glow():void {

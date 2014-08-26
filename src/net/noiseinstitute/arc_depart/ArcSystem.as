@@ -1,13 +1,15 @@
 package net.noiseinstitute.arc_depart {
+    import flash.display.BitmapData;
+
     public class ArcSystem {
         private static const BASE_SHRINK_RATE:Number = 20 / Main.LOGIC_FPS; // Pixels per frame.
         private static const SHRINK_RATE_INCREMENT:Number = 0.1 / Main.LOGIC_FPS; // Pixels per frame per arc cleared.
 
         private var _arcs:Vector.<Arc> = new <Arc>[];
 
-        public function ArcSystem(playerShip:PlayerShip) {
+        public function ArcSystem(playerShip:PlayerShip, blurTarget:BitmapData, bigBlurTarget:BitmapData) {
             for (var i:int = 0; i < 4; ++i) {
-                addArc(playerShip);
+                addArc(playerShip, blurTarget, bigBlurTarget);
             }
         }
 
@@ -15,8 +17,8 @@ package net.noiseinstitute.arc_depart {
             return _arcs;
         }
 
-        private function addArc(playerShip:PlayerShip):void {
-            var arc:Arc = new Arc(playerShip);
+        private function addArc(playerShip:PlayerShip, blurTarget:BitmapData, bigBlurTarget:BitmapData):void {
+            var arc:Arc = new Arc(playerShip, blurTarget, bigBlurTarget);
             var arcIndex:int = _arcs.length;
 
             arc.radius = 192 * (arcIndex + 1);

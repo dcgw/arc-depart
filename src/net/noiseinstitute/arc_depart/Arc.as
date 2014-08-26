@@ -1,4 +1,6 @@
 package net.noiseinstitute.arc_depart {
+    import flash.display.BitmapData;
+
     import net.flashpunk.Entity;
     import net.noiseinstitute.basecode.Static;
     import net.noiseinstitute.basecode.VectorMath;
@@ -8,7 +10,7 @@ package net.noiseinstitute.arc_depart {
 
         public var onClosed:Function;
 
-        private var arcGraphic:ArcGraphic = new ArcGraphic;
+        private var arcGraphic:ArcGraphic;
 
         private var angle:Number = 0;
 
@@ -22,9 +24,9 @@ package net.noiseinstitute.arc_depart {
 
         public var angularVelocity:Number = 0; // Degrees per frame.
 
-        public function Arc(playerShip:PlayerShip) {
+        public function Arc(playerShip:PlayerShip, blurTarget:BitmapData, bigBlurTarget:BitmapData) {
             this.playerShip = playerShip;
-            graphic = arcGraphic;
+            graphic = arcGraphic = new ArcGraphic(blurTarget, bigBlurTarget);
         }
 
         override public function update():void {
