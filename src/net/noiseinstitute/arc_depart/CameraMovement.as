@@ -41,8 +41,8 @@ package net.noiseinstitute.arc_depart {
             headingAdjustment.x += (Static.point.x - headingAdjustment.x) * HEADING_ADJUSTMENT_SMOOTHING_FACTOR;
             headingAdjustment.y += (Static.point.y - headingAdjustment.y) * HEADING_ADJUSTMENT_SMOOTHING_FACTOR;
 
-            camera.x = playerShip.x + velocityAdjustment.x - Main.CENTER_X + velocityAdjustment.x;
-            camera.y = playerShip.y + velocityAdjustment.y - Main.CENTER_Y + velocityAdjustment.y;
+            camera.x = playerShip.x + velocityAdjustment.x - Main.CENTER_X + headingAdjustment.x;
+            camera.y = playerShip.y + velocityAdjustment.y - Main.CENTER_Y + headingAdjustment.y;
         }
     }
 }
