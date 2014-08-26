@@ -9,7 +9,7 @@ package net.noiseinstitute.arc_depart {
         private static const MAX_VELOCITY_ADJUSTMENT:int = 144;
         private static const VELOCITY_ADJUSTMENT_SMOOTHING_FACTOR:Number = 0.04;
 
-        private static const HEADING_ADJUSTMENT_MAGNITUDE:Number = 96;
+        private static const HEADING_ADJUSTMENT_MAGNITUDE:Number = 32;
         private static const HEADING_ADJUSTMENT_SMOOTHING_FACTOR:Number = 0.04;
 
         private var camera:Point;
