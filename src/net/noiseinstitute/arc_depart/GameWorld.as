@@ -45,9 +45,6 @@ package net.noiseinstitute.arc_depart {
             cameraMovement = new CameraMovement(camera, playerShip, arcSystem);
             cameraMovement.update();
 
-//            camera.x = -Main.WIDTH * 0.5;
-//            camera.y = -Main.HEIGHT * 0.5 - 16;
-
             music.onBeat = onBeat;
         }
 
@@ -61,6 +58,7 @@ package net.noiseinstitute.arc_depart {
 
                 music.play();
                 playerShip.active = true;
+                cameraMovement.title = false;
                 title.hide();
             }
 
