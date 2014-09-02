@@ -42,7 +42,7 @@ package net.noiseinstitute.arc_depart {
 
             addGraphic(title);
 
-            cameraMovement = new CameraMovement(camera, playerShip, arcSystem);
+            cameraMovement = new CameraMovement(camera, playerShip);
             cameraMovement.update();
 
             music.onBeat = onBeat;

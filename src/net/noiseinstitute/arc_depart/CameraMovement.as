@@ -16,17 +16,15 @@ package net.noiseinstitute.arc_depart {
 
         private var camera:Point;
         private var playerShip:PlayerShip;
-        private var arcSystem:ArcSystem;
 
         private var velocityAdjustment:Point = new Point;
         private var headingAdjustment:Point = new Point(TITLE_ADJUSTMENT.x, TITLE_ADJUSTMENT.y);
 
         public var title:Boolean = true;
 
-        public function CameraMovement(camera:Point, playerShip:PlayerShip, arcSystem:ArcSystem) {
+        public function CameraMovement(camera:Point, playerShip:PlayerShip) {
             this.camera = camera;
             this.playerShip = playerShip;
-            this.arcSystem = arcSystem;
 
             camera.x = -Main.CENTER_X;
             camera.y = -Main.CENTER_Y - HEADING_ADJUSTMENT_MAGNITUDE;
