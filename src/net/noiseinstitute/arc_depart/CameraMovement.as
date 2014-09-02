@@ -33,6 +33,14 @@ package net.noiseinstitute.arc_depart {
         }
 
         public function update():void {
+            updateVelocityAdjustment();
+            updateHeadingAdjustment();
+
+            camera.x = playerShip.x + velocityAdjustment.x + headingAdjustment.x - Main.CENTER_X;
+            camera.y = playerShip.y + velocityAdjustment.y + headingAdjustment.y - Main.CENTER_Y;
+        }
+
+        private function updateVelocityAdjustment():void {
             if (title) {
                 Static.point.x = 0;
                 Static.point.y = 0;
@@ -47,7 +55,9 @@ package net.noiseinstitute.arc_depart {
 
             velocityAdjustment.x += (Static.point.x - velocityAdjustment.x) * VELOCITY_ADJUSTMENT_SMOOTHING_FACTOR;
             velocityAdjustment.y += (Static.point.y - velocityAdjustment.y) * VELOCITY_ADJUSTMENT_SMOOTHING_FACTOR;
+        }
 
+        private function updateHeadingAdjustment():void {
             if (title) {
                 Static.point.x = TITLE_ADJUSTMENT.x;
                 Static.point.y = TITLE_ADJUSTMENT.y;
@@ -57,9 +67,6 @@ package net.noiseinstitute.arc_depart {
 
             headingAdjustment.x += (Static.point.x - headingAdjustment.x) * HEADING_ADJUSTMENT_SMOOTHING_FACTOR;
             headingAdjustment.y += (Static.point.y - headingAdjustment.y) * HEADING_ADJUSTMENT_SMOOTHING_FACTOR;
-
-            camera.x = playerShip.x + velocityAdjustment.x - Main.CENTER_X + headingAdjustment.x;
-            camera.y = playerShip.y + velocityAdjustment.y - Main.CENTER_Y + headingAdjustment.y;
         }
     }
 }
