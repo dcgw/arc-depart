@@ -1,5 +1,6 @@
 package net.noiseinstitute.arc_depart {
     import flash.display.BitmapData;
+    import flash.geom.Point;
 
     import net.flashpunk.Entity;
     import net.noiseinstitute.basecode.Static;
@@ -24,9 +25,16 @@ package net.noiseinstitute.arc_depart {
 
         public var angularVelocity:Number = 0; // Degrees per frame.
 
+        private var _exitPosition:Point = new Point;
+
         public function Arc(playerShip:PlayerShip, blurTarget:BitmapData, bigBlurTarget:BitmapData) {
             this.playerShip = playerShip;
             graphic = arcGraphic = new ArcGraphic(blurTarget, bigBlurTarget);
+        }
+
+        public function computeExitPosition():Point {
+            VectorMath.becomePolar(_exitPosition, angle, radius);
+            return _exitPosition;
         }
 
         override public function update():void {

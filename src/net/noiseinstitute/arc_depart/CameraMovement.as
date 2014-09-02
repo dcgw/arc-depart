@@ -12,6 +12,9 @@ package net.noiseinstitute.arc_depart {
         private static const HEADING_ADJUSTMENT_MAGNITUDE:Number = 32;
         private static const HEADING_ADJUSTMENT_SMOOTHING_FACTOR:Number = 0.04;
 
+        private static const EXIT_ADJUSTMENT_MAGNITUDE:Number = 32;
+        private static const EXIT_ADJUSTMENT_SMOOTHING_FACTOR:Number = 0.04;
+
         private static const TITLE_ADJUSTMENT:Point = new Point(0, -16);
 
         private var camera:Point;
@@ -20,6 +23,7 @@ package net.noiseinstitute.arc_depart {
 
         private var velocityAdjustment:Point = new Point;
         private var headingAdjustment:Point = new Point(TITLE_ADJUSTMENT.x, TITLE_ADJUSTMENT.y);
+        private var exitAdjustment:Point = new Point;
 
         public var title:Boolean = true;
 
@@ -35,9 +39,10 @@ package net.noiseinstitute.arc_depart {
         public function update():void {
             updateVelocityAdjustment();
             updateHeadingAdjustment();
+            updateExitAdjustment();
 
-            camera.x = playerShip.x + velocityAdjustment.x + headingAdjustment.x - Main.CENTER_X;
-            camera.y = playerShip.y + velocityAdjustment.y + headingAdjustment.y - Main.CENTER_Y;
+            camera.x = playerShip.x + velocityAdjustment.x + headingAdjustment.x + exitAdjustment.x - Main.CENTER_X;
+            camera.y = playerShip.y + velocityAdjustment.y + headingAdjustment.y + exitAdjustment.y - Main.CENTER_Y;
         }
 
         private function updateVelocityAdjustment():void {
@@ -67,6 +72,25 @@ package net.noiseinstitute.arc_depart {
 
             headingAdjustment.x += (Static.point.x - headingAdjustment.x) * HEADING_ADJUSTMENT_SMOOTHING_FACTOR;
             headingAdjustment.y += (Static.point.y - headingAdjustment.y) * HEADING_ADJUSTMENT_SMOOTHING_FACTOR;
+        }
+
+        private function updateExitAdjustment():void {
+            if (title) {
+                Static.point.x = 0;
+                Static.point.y = 0;
+            } else {
+                VectorMath.copyTo(Static.point, arcSystem.computeCurrentExitPosition());
+
+                Static.point.x -= playerShip.x;
+                Static.point.y -= playerShip.y;
+
+                if (VectorMath.magnitude(Static.point) > EXIT_ADJUSTMENT_MAGNITUDE) {
+                    VectorMath.setMagnitudeInPlace(Static.point, EXIT_ADJUSTMENT_MAGNITUDE);
+                }
+            }
+
+            exitAdjustment.x += (Static.point.x - exitAdjustment.x) * EXIT_ADJUSTMENT_SMOOTHING_FACTOR;
+            exitAdjustment.y += (Static.point.y - exitAdjustment.y) * EXIT_ADJUSTMENT_SMOOTHING_FACTOR;
         }
     }
 }
