@@ -38,6 +38,11 @@ package net.noiseinstitute.arc_depart {
             if (arcIndex == 0) {
                 for (var i:int = 0; i < _arcs.length; ++i) {
                     _arcs[i].shrinkRate = BASE_SHRINK_RATE;
+                    _arcs[i].angularVelocity = Math.PI * 0.01 * i;
+
+                    if (i % 2 == 0) {
+                        _arcs[i].angularVelocity *= -1;
+                    }
                 }
             }
         }
