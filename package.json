@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@types/webpack-env": "1.18.0",
+    "excalibur": "0.27.0",
     "tslib": "2.5.0"
   },
   "devDependencies": {
