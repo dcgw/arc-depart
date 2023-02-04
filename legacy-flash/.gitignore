@@ -1,0 +1,11 @@
+/.idea
+*.iml
+/out
+*~
+/build
+/.actionScriptProperties
+/.project
+/.settings
+/bin-debug
+/html-template
+.DS_Store

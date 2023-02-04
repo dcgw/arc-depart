@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    version="1.1" width="640" height="480"
+    stroke-width="4px" fill="none" stroke-linecap="round"
+    stroke-linejoin="round">
+  <defs>
+    <filter id="blur" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4"/>
+    </filter>
+    <path id="a" d="M 0,40 L 0,16 A 16,16,90,0,1,16,0 L 24,0
+        A 16,16,90,0,1,40,16 L 40,40 M 0,24 L 40,24"/>
+    <path id="r" d="M 0,40 L 0,0 24,0 A 16,12,180,1,1,24,24
+        L 0,24 M 24,24 A 16,16,90,0,1,36,40"/>
+    <path id="c" d="M 32,0 L 16,0 A 16,16,90,0,0,0,16
+        L 0,24 A 16,16,90,0,0,16,40 L 40,40"/>
+    <path id="d" d="M 0,40 L 0,0 16,0 A 24,24,90,0,1,40,24
+        A 16,16,90,0,1,24,40 Z"/>
+    <path id="e" d="M 32,0 L 0,0 0,40 40,40 M 0,24 L 24,24"/>
+    <path id="p" d="M 0,40 L 0,0 24,0 A 16,12,180,1,1,24,24 L 0,24"/>
+    <path id="t" d="M 0,0 L 40,0 M 20,0 L 20,40"/>
+    <path id="arc" d="M 96,-166.3 A 192,192,300,1,1,-96,-166.3"/>
+    <path id="ship" d="M 0,-20 L 14,4 20,4 10,20 6,14 -6,14 -10,20
+        -20,4 -14,4 Z"/>
+  </defs>
+  <rect x="0" y="0" width="640" height="480" fill="#000"/>
+  <g stroke="#fb4426">
+    <g filter="url(#blur)">
+      <use xlink:href="#a" x="48" y="24"/>
+      <use xlink:href="#r" x="104" y="24"/>
+      <use xlink:href="#c" x="160" y="24"/>
+      <use xlink:href="#d" x="272" y="24"/>
+      <use xlink:href="#e" x="328" y="24"/>
+      <use xlink:href="#p" x="384" y="24"/>
+      <use xlink:href="#a" x="440" y="24"/>
+      <use xlink:href="#r" x="496" y="24"/>
+      <use xlink:href="#t" x="552" y="24"/>
+    </g>
+    <use xlink:href="#a" x="48" y="24"/>
+    <use xlink:href="#r" x="104" y="24"/>
+    <use xlink:href="#c" x="160" y="24"/>
+    <use xlink:href="#d" x="272" y="24"/>
+    <use xlink:href="#e" x="328" y="24"/>
+    <use xlink:href="#p" x="384" y="24"/>
+    <use xlink:href="#a" x="440" y="24"/>
+    <use xlink:href="#r" x="496" y="24"/>
+    <use xlink:href="#t" x="552" y="24"/>
+  </g>
+  <g stroke="#fff" opacity="0.5">
+    <use xlink:href="#a" x="48" y="24"/>
+    <use xlink:href="#r" x="104" y="24"/>
+    <use xlink:href="#c" x="160" y="24"/>
+    <use xlink:href="#d" x="272" y="24"/>
+    <use xlink:href="#e" x="328" y="24"/>
+    <use xlink:href="#p" x="384" y="24"/>
+    <use xlink:href="#a" x="440" y="24"/>
+    <use xlink:href="#r" x="496" y="24"/>
+    <use xlink:href="#t" x="552" y="24"/>
+  </g>
+  <use xlink:href="#arc" x="320" y="256" stroke="#3a94e1"
+      filter="url(#blur)"/>
+  <use xlink:href="#arc" x="320" y="256" stroke="#3a94e1"/>
+  <use xlink:href="#arc" x="320" y="256" stroke="#fff" opacity="0.5"/>
+  <use xlink:href="#ship" x="320" y="256" stroke="#30ef42"
+      filter="url(#blur)"/>
+  <use xlink:href="#ship" x="320" y="256" stroke="#30ef42"/>
+  <use xlink:href="#ship" x="320" y="256" stroke="#fff" opacity="0.5"/>
+</svg>

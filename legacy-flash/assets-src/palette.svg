@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    version="1.1" width="144" height="96"
+    stroke-width="4px" fill="none" stroke-linecap="round"
+    stroke-linejoin="round">
+  <defs>
+    <filter id="blur" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4"/>
+    </filter>
+    <path id="line" d="M 0,0 L 0,64"/>
+  </defs>
+  <rect x="0" y="0" width="144" height="96" fill="#000"/>
+  <use xlink:href="#line" x="16" y="16" stroke="#fb4426" filter="url(#blur)"/>
+  <use xlink:href="#line" x="16" y="16" stroke="#fb4426"/>
+  <use xlink:href="#line" x="16" y="16" stroke="#fff" opacity="0.5"/>
+  <use xlink:href="#line" x="32" y="16" stroke="#ff9103" filter="url(#blur)"/>
+  <use xlink:href="#line" x="32" y="16" stroke="#ff9103"/>
+  <use xlink:href="#line" x="32" y="16" stroke="#fff" opacity="0.5"/>
+  <use xlink:href="#line" x="48" y="16" stroke="#fff10d" filter="url(#blur)"/>
+  <use xlink:href="#line" x="48" y="16" stroke="#fff10d"/>
+  <use xlink:href="#line" x="48" y="16" stroke="#fff" opacity="0.5"/>
+  <use xlink:href="#line" x="64" y="16" stroke="#30ef42" filter="url(#blur)"/>
+  <use xlink:href="#line" x="64" y="16" stroke="#30ef42"/>
+  <use xlink:href="#line" x="64" y="16" stroke="#fff" opacity="0.5"/>
+  <use xlink:href="#line" x="80" y="16" stroke="#21f9e2" filter="url(#blur)"/>
+  <use xlink:href="#line" x="80" y="16" stroke="#21f9e2"/>
+  <use xlink:href="#line" x="80" y="16" stroke="#fff" opacity="0.5"/>
+  <use xlink:href="#line" x="96" y="16" stroke="#3a94e1" filter="url(#blur)"/>
+  <use xlink:href="#line" x="96" y="16" stroke="#3a94e1"/>
+  <use xlink:href="#line" x="96" y="16" stroke="#fff" opacity="0.5"/>
+  <use xlink:href="#line" x="112" y="16" stroke="#f64eec"
+      filter="url(#blur)"/>
+  <use xlink:href="#line" x="112" y="16" stroke="#f64eec"/>
+  <use xlink:href="#line" x="112" y="16" stroke="#fff" opacity="0.5"/>
+  <use xlink:href="#line" x="128" y="16" stroke="#fb4426" filter="url(#blur)"/>
+  <use xlink:href="#line" x="128" y="16" stroke="#fb4426"/>
+  <use xlink:href="#line" x="128" y="16" stroke="#fff" opacity="0.5"/>
+</svg>
