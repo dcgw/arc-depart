@@ -18,6 +18,7 @@
     "lint": "tsc && eslint . && prettier --check .",
     "prepack": "tsc && pinst --disable",
     "postpack": "pinst --enable",
+    "start": "webpack serve --open",
     "test": "ava"
   },
   "engines": {
