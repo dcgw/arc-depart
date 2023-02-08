@@ -54,7 +54,7 @@
     "husky": "8.0.3",
     "inquirer": "8.2.5",
     "pinst": "3.0.0",
-    "prettier": "2.8.3",
+    "prettier": "2.8.4",
     "semantic-release": "19.0.5",
     "ts-loader": "9.4.2",
     "ts-node": "10.9.1",
