@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "@types/domready": "1.0.0",
-    "@types/webpack-env": "1.18.1",
+    "@types/webpack-env": "1.18.2",
     "domready": "1.0.8",
     "excalibur": "0.27.0",
     "tslib": "2.6.2"
