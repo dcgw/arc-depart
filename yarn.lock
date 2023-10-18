@@ -1175,10 +1175,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/domready@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@types/domready@npm:1.0.0"
-  checksum: 9846e9783613006b31ac7a726f23b40fb76445a528136f7f8890b03439cbd387336b5f07aa97c14962a76f984a28424892f2ec2318e7b8ed73b8855300d253e6
+"@types/domready@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@types/domready@npm:1.0.1"
+  checksum: 78fe6ee865e3736c24e906ce1cded08d85b2f23cca358d22cb8f28af7e4ed98453b367c263361fb214c20c171ad404ba3073c147bed4fde0d672864b176745d3
   languageName: node
   linkType: hard
 
@@ -2014,7 +2014,7 @@ __metadata:
     "@softwareventures/prettier-config": 4.0.0
     "@softwareventures/semantic-release-config": 3.1.0
     "@softwareventures/webpack-config": 5.1.0
-    "@types/domready": 1.0.0
+    "@types/domready": 1.0.1
     "@types/node": 17.0.45
     "@types/webpack-env": 1.18.2
     "@typescript-eslint/eslint-plugin": 5.62.0
